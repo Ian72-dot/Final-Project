@@ -3,7 +3,27 @@
 <head>
   <title>Reels</title>
   <link rel="stylesheet" href="style.css">
+
+  <style>
+    .reels-container {
+      margin-left: 220px;
+      padding: 40px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 40px; /* space between videos */
+    }
+
+    video {
+      width: 360px; /* typical Shorts width */
+      height: 640px; /* typical Shorts height */
+      border-radius: 15px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.2);
+      background: #000;
+    }
+  </style>
 </head>
+
 <body>
 
 <div class="sidebar">
@@ -12,8 +32,18 @@
   <a href="podcast.html">Podcast</a>
 </div>
 
-<div class="content">
-  <h1>B</h1>
+<div class="reels-container">
+
+  <video controls>
+    <source src="reel1.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+
+  <video controls>
+    <source src="reel2.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+
 </div>
 
 </body>
