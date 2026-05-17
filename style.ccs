@@ -1,7 +1,6 @@
 body {
   margin: 0;
   font-family: Arial, sans-serif;
-  display: flex;
 }
 
 /* Sidebar */
@@ -26,17 +25,23 @@ body {
   background: #444;
 }
 
-/* Main content */
+/* Main page content */
 .content {
-  margin-left: 200px;
+  margin-left: 220px;
   padding: 40px;
-  flex: 1;
 }
 
-/* Login page */
+/* Login page only */
+.login-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+/* Login box */
 .login-container {
   width: 300px;
-  margin: 100px auto;
   text-align: center;
 }
 
