@@ -1,10 +1,41 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Posts</title>
-  <link rel="stylesheet" href="style.css">
 
   <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f0f2f5;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      position: fixed;
+      left: 0;
+      top: 0;
+      width: 200px;
+      height: 100vh;
+      background: #222;
+      padding-top: 20px;
+    }
+
+    .sidebar a {
+      display: block;
+      color: white;
+      text-decoration: none;
+      padding: 15px 20px;
+      font-size: 18px;
+    }
+
+    .sidebar a:hover {
+      background: #444;
+    }
+
+    /* Posts */
     .posts-container {
       margin-left: 220px;
       padding: 40px;
@@ -15,40 +46,52 @@
     }
 
     .post {
-      width: 600px;
-      background: #f4f4f4;
+      width: 100%;
+      max-width: 600px;
+      background: white;
       padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      border-radius: 12px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      transition: transform 0.2s ease;
+    }
+
+    .post:hover {
+      transform: translateY(-3px);
     }
 
     .username {
       font-weight: bold;
-      margin-bottom: 10px;
-      color: #333;
+      font-size: 18px;
+      margin-bottom: 15px;
+      color: #222;
     }
 
     .post-text {
-      font-size: 18px;
-      line-height: 1.5;
-      margin-bottom: 15px;
+      font-size: 17px;
+      line-height: 1.6;
+      color: #333;
     }
 
+    .hashtags {
+      color: #1877f2;
+      font-weight: bold;
+    }
+
+    /* Comments */
     .comments {
-      margin-top: 15px;
-      padding-top: 10px;
-      border-top: 1px solid #ccc;
+      margin-top: 20px;
+      padding-top: 15px;
+      border-top: 1px solid #ddd;
     }
 
     .comment {
-      font-size: 16px;
-      margin-bottom: 10px;
+      margin-bottom: 12px;
       color: #555;
+      line-height: 1.5;
     }
 
-    .comment .username {
+    .comment-username {
       font-weight: bold;
-      margin-right: 5px;
       color: #222;
     }
   </style>
@@ -56,43 +99,80 @@
 
 <body>
 
-<div class="sidebar">
-  <a href="posts.html">Posts</a>
-  <a href="reels.html">Reels</a>
-  <a href="podcast.html">Podcast</a>
-</div>
-
-<div class="posts-container">
-
-  <!-- Post 1 -->
-  <div class="post">
-    <div class="username">Ethanoid9986</div>
-    <div class="post-text">
-      Today I was thinking about the story of the Feeding of the 5000. Jesus took just five loaves and two fish and fed a huge crowd. I keep wondering… did that bread actually taste good? Or was it more like communion bread—symbolic, simple, but deeply meaningful? Either way, the miracle shows God’s provision. The fact that everyone ate and was satisfied reminds me that blessings often come in unexpected ways.
-      <br>#CHRIST #Faith #Miracles
-    </div>
-
-    <div class="comments">
-      <div class="comment"><span class="username">Mr.Ian_Genius44:</span> Love this reflection! Really makes me appreciate God’s provision.</div>
-      <div class="comment"><span class="username">Ethanoid9986:</span> Thanks! It’s amazing to think about how even small things can be multiplied.</div>
-    </div>
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <a href="posts.html">Posts</a>
+    <a href="reels.html">Reels</a>
+    <a href="podcast.html">Podcast</a>
   </div>
 
-  <!-- Post 2 -->
-  <div class="post">
-    <div class="username">Mr.Ian_Genius44</div>
-    <div class="post-text">
-      I’ve been reflecting on the healing of the blind man. People asked Jesus if he could heal a blind person, and I couldn’t help but think… what if it were my own mom? Could He give her sight? The faith of the community and the courage to seek Jesus’ help is inspiring. Sometimes we wonder if God will intervene for our loved ones, and this story reminds me that nothing is impossible for Him.
-      <br>#CHRIST #Healing #Faith
+  <!-- Posts -->
+  <div class="posts-container">
+
+    <!-- Post 1 -->
+    <div class="post">
+      <div class="username">Ethanoid9986</div>
+
+      <div class="post-text">
+        Today I was thinking about the story of the Feeding of the 5,000.
+        Jesus took just five loaves and two fish and fed a huge crowd.
+        I keep wondering: did that bread actually taste good?
+        Or was it more like communion bread — symbolic, simple,
+        but deeply meaningful?
+        <br><br>
+
+        Either way, the miracle shows God’s provision.
+        The fact that everyone ate and was satisfied reminds me that
+        blessings often come in unexpected ways.
+        <br><br>
+
+        <span class="hashtags">
+          #CHRIST #Faith #Miracles
+        </span>
+      </div>
+
+      <div class="comments">
+        <div class="comment">
+          <span class="comment-username">Mr.Ian_Genius44:</span>
+          Love this reflection! It really makes me appreciate God’s provision.
+        </div>
+      </div>
     </div>
 
-    <div class="comments">
-      <div class="comment"><span class="username">Ethanoid9986:</span> Such a powerful reminder! Faith really does move mountains.</div>
-      <div class="comment"><span class="username">Mr.Ian_Genius44:</span> Absolutely! It makes me grateful for the little miracles every day.</div>
+    <!-- Post 2 -->
+    <div class="post">
+      <div class="username">Mr.Ian_Genius44</div>
+
+      <div class="post-text">
+        I’ve been reflecting on the healing of the blind man.
+        People asked Jesus if He could heal a blind person,
+        and I couldn’t help but think: what if it were my own mom?
+        <br><br>
+
+        The faith of the community and the courage to seek Jesus’ help
+        is inspiring. Sometimes we wonder if God will intervene
+        for our loved ones, and this story reminds me that
+        nothing is impossible for Him.
+        <br><br>
+
+        <span class="hashtags">
+          #CHRIST #Healing #Faith
+        </span>
+      </div>
+
+      <div class="comments">
+        <div class="comment">
+          <span class="comment-username">Ethanoid9986:</span>
+          Such a powerful reminder! Faith really does move mountains.
+          It’s amazing to think about how even small things can be multiplied.
+          This story about feeding the 5,000 reminds me of how much God cares about us.
+          It shows that He is willing to perform miracles for us,
+          even though we are just humans made in His image.
+        </div>
+      </div>
     </div>
+
   </div>
-
-</div>
 
 </body>
 </html>
