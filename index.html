@@ -2,46 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Download Snake for iPad</title>
-<style>
-    body {
-        font-family: Arial, sans-serif;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-        margin: 0;
-        background: #f0f0f0;
-    }
-
-    button {
-        font-size: 1.2rem;
-        padding: 15px 30px;
-        border: none;
-        border-radius: 10px;
-        background: #28a745;
-        color: white;
-        cursor: pointer;
-    }
-
-    button:hover {
-        background: #218838;
-    }
-</style>
-</head>
-<body>
-
-<button id="downloadBtn">Download Snake Game</button>
-
-<script>
-document.getElementById("downloadBtn").addEventListener("click", () => {
-
-const snakeGame = `<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 <title>Snake</title>
 <style>
 body{
@@ -56,30 +17,39 @@ body{
     height:100vh;
     overflow:hidden;
 }
-canvas{
-    background:#000;
-    border:2px solid #fff;
-    max-width:95vw;
-    max-height:60vh;
+
+h1{
+    margin:10px 0;
 }
+
 #score{
-    margin:10px;
     font-size:24px;
+    margin-bottom:10px;
 }
+
+canvas{
+    background:black;
+    border:2px solid white;
+    width:min(90vw, 400px);
+    height:min(90vw, 400px);
+}
+
 .controls{
     margin-top:15px;
     display:grid;
     grid-template-columns:80px 80px 80px;
     gap:10px;
 }
+
 .controls button{
-    font-size:24px;
-    height:60px;
+    font-size:28px;
+    height:65px;
     border:none;
-    border-radius:10px;
-    background:#444;
+    border-radius:12px;
+    background:#333;
     color:white;
 }
+
 .controls button:active{
     background:#666;
 }
@@ -87,76 +57,83 @@ canvas{
 </head>
 <body>
 
+<h1>🐍 Snake</h1>
 <div id="score">Score: 0</div>
+
 <canvas id="game" width="400" height="400"></canvas>
 
 <div class="controls">
     <div></div>
-    <button onclick="setDir(0,-1)">⬆️</button>
+    <button onclick="changeDir(0,-1)">⬆️</button>
     <div></div>
 
-    <button onclick="setDir(-1,0)">⬅️</button>
-    <button onclick="setDir(0,1)">⬇️</button>
-    <button onclick="setDir(1,0)">➡️</button>
+    <button onclick="changeDir(-1,0)">⬅️</button>
+    <button onclick="changeDir(0,1)">⬇️</button>
+    <button onclick="changeDir(1,0)">➡️</button>
 </div>
 
 <script>
-const canvas = document.getElementById('game');
-const ctx = canvas.getContext('2d');
+const canvas = document.getElementById("game");
+const ctx = canvas.getContext("2d");
 
 const grid = 20;
-const size = canvas.width / grid;
+const tile = canvas.width / grid;
 
 let snake = [{x:10,y:10}];
 let dx = 1;
 let dy = 0;
-let food = spawnFood();
 let score = 0;
 
-function spawnFood(){
+let food = randomFood();
+
+function randomFood(){
     return {
         x: Math.floor(Math.random()*grid),
         y: Math.floor(Math.random()*grid)
     };
 }
 
-function setDir(x,y){
+function changeDir(x,y){
     if(x === -dx && y === -dy) return;
     dx = x;
     dy = y;
 }
 
-document.addEventListener('keydown', e=>{
-    if(e.key==='ArrowUp') setDir(0,-1);
-    if(e.key==='ArrowDown') setDir(0,1);
-    if(e.key==='ArrowLeft') setDir(-1,0);
-    if(e.key==='ArrowRight') setDir(1,0);
+document.addEventListener("keydown", e=>{
+    if(e.key==="ArrowUp") changeDir(0,-1);
+    if(e.key==="ArrowDown") changeDir(0,1);
+    if(e.key==="ArrowLeft") changeDir(-1,0);
+    if(e.key==="ArrowRight") changeDir(1,0);
 });
 
-function gameLoop(){
+function update(){
     const head = {
         x: snake[0].x + dx,
         y: snake[0].y + dy
     };
 
     if(
-        head.x < 0 || head.y < 0 ||
-        head.x >= grid || head.y >= grid ||
+        head.x < 0 ||
+        head.y < 0 ||
+        head.x >= grid ||
+        head.y >= grid ||
         snake.some(seg => seg.x === head.x && seg.y === head.y)
     ){
-        alert('Game Over! Score: ' + score);
+        alert("Game Over! Score: " + score);
+
         snake = [{x:10,y:10}];
         dx = 1;
         dy = 0;
         score = 0;
-        food = spawnFood();
+        food = randomFood();
+        return;
     }
 
     snake.unshift(head);
 
     if(head.x === food.x && head.y === food.y){
         score++;
-        food = spawnFood();
+        food = randomFood();
     } else {
         snake.pop();
     }
@@ -165,38 +142,23 @@ function gameLoop(){
 }
 
 function draw(){
-    ctx.fillStyle = '#000';
+    ctx.fillStyle = "black";
     ctx.fillRect(0,0,canvas.width,canvas.height);
 
-    ctx.fillStyle = 'red';
-    ctx.fillRect(food.x*size, food.y*size, size, size);
+    ctx.fillStyle = "red";
+    ctx.fillRect(food.x*tile, food.y*tile, tile, tile);
 
-    ctx.fillStyle = 'lime';
-    snake.forEach(seg=>{
-        ctx.fillRect(seg.x*size, seg.y*size, size-1, size-1);
+    ctx.fillStyle = "lime";
+    snake.forEach(part=>{
+        ctx.fillRect(part.x*tile, part.y*tile, tile-1, tile-1);
     });
 
-    document.getElementById('score').textContent =
-        'Score: ' + score;
+    document.getElementById("score").textContent =
+        "Score: " + score;
 }
 
-setInterval(gameLoop, 120);
 draw();
-</script>
-
-</body>
-</html>`;
-
-const blob = new Blob([snakeGame], { type: "text/html" });
-const url = URL.createObjectURL(blob);
-
-const a = document.createElement("a");
-a.href = url;
-a.download = "snake.html";
-a.click();
-
-URL.revokeObjectURL(url);
-});
+setInterval(update, 120);
 </script>
 
 </body>
